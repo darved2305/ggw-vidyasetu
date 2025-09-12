@@ -2,6 +2,8 @@
 import { Route, Routes } from 'react-router-dom';
 import FacultyPage from './FacultyPage.jsx';
 import HomePage from './HomePage.jsx';
+import StudentPage from './StudentPage.jsx';
+import AdminPage from './AdminPage.jsx';
 
 export default function App() {
   return (
