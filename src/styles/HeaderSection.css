@@ -1,0 +1,76 @@
+.header-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-main {
+  flex: 1;
+}
+
+.header-title {
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.header-desc {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header-btn {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #fff;
+  background: #1a2e4f;
+  cursor: pointer;
+}
+
+.header-logo {
+  text-align: center;
+}
+
+.header-logo-img {
+  width: 90px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.header-semester {
+  font-weight: bold;
+  color: #3b6fc2;
+  font-size: 1.1rem;
+}
+
+.header-calendar {
+  min-width: 220px;
+  text-align: right;
+}
+
+.header-calendar-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.header-calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: #f5f8fa;
+  border-radius: 8px;
+}
+
+.header-calendar-table th {
+  color: #3b6fc2;
+}
+
+.header-calendar-table .calendar-today {
+  background: #e3eefd;
+  border-radius: 4px;
+}
