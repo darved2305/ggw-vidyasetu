@@ -9,34 +9,15 @@ const sepLight = {
 };
 
 const TopBarSection = () => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '1.2rem',
-      height: '28px',
-      background: '#3b6fc2',
-      color: '#fff',
-      fontSize: '0.98rem',
-      fontWeight: 500,
-    }}
-  >
-    <span style={{ marginRight: '1.2rem' }}>
+  <div className='flex justify-center items-center gap-[1.2rem] h-[28px] bg-[#3b6fc2] text-white text-[0.98rem] font-medium'>
+    <span className='mr-[1.2rem]'>
       Skip to Main Content
     </span>
 
     <span style={sepLight} />
 
-    <span
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.7rem',
-        opacity: 0.9,
-      }}
-    >
-      <span title="Increase Font Size" style={{ opacity: 0.7 }}>
+    <span className='flex items-center gap-[0.7rem] opacity-70'>
+      <span title="Increase Font Size" className='opacity-70'>
         <svg width="18" height="18" viewBox="0 0 24 24">
           <text
             x="4"
@@ -50,7 +31,7 @@ const TopBarSection = () => (
         </svg>
       </span>
 
-      <span title="Decrease Font Size" style={{ opacity: 0.7 }}>
+      <span title="Decrease Font Size" className='opacity-70'>
         <svg width="18" height="18" viewBox="0 0 24 24">
           <text
             x="10"
@@ -64,7 +45,7 @@ const TopBarSection = () => (
         </svg>
       </span>
 
-      <span title="High Contrast" style={{ opacity: 0.7 }}>
+      <span title="High Contrast" className='opacity-70' >
         <svg width="18" height="18" viewBox="0 0 24 24">
           <circle cx="9" cy="12" r="6" fill="#fff" />
           <circle cx="15" cy="12" r="6" fill="#3b6fc2" />
