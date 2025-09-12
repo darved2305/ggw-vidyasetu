@@ -67,7 +67,7 @@ export default function ServiceBox({ title, desc, boxColor, logoUrl }) {
       </div>
       <p style={descStyle}>{desc}</p>
       <button className="cta" style={buttonStyle}>
-        Know More &nbsp; <span style={{ fontSize: 18 }}>&rarr;</span>
+        Know More &nbsp; <span className="text-[18px]">&rarr;</span>
       </button>
     </article>
   )

@@ -12,18 +12,10 @@ const TestRecordsSection = () => (
       Test & Evaluation Records
     </h3>
 
-    <table
-      style={{
-        width: '100%',
-        borderCollapse: 'collapse',
-        fontSize: '0.98rem',
-        background: '#f5f8fa',
-        borderRadius: '10px',
-      }}
-    >
+    <table className='w-full border-collapse text-[0.98rem] bg-[#f5f8fa] rounded-[10px]'>
       <thead>
-        <tr style={{ background: '#e3eefd', color: '#3b6fc2' }}>
-          <th style={{ padding: '0.7rem' }}>Exam Name</th>
+        <tr className="bg-[#e3eefd] text-[#3b6fc2]">
+          <th className="p-[0.7rem]">Exam Name</th>
           <th>Course</th>
           <th>Date</th>
           <th>Time</th>
@@ -40,7 +32,7 @@ const TestRecordsSection = () => (
           <td>Aug 27, 2025</td>
           <td>10:00 AM</td>
           <td>NPTEL</td>
-          <td style={{ color: '#4cae4c', fontWeight: 'bold' }}>Completed</td>
+          <td className="text-[#4cae4c] font-bold">Completed</td>
           <td>⋮</td>
         </tr>
 
@@ -50,7 +42,7 @@ const TestRecordsSection = () => (
           <td>Sep 02, 2025</td>
           <td>02:00 PM</td>
           <td>AICTE FDP</td>
-          <td style={{ color: '#4cae4c', fontWeight: 'bold' }}>Completed</td>
+          <td className="text-[#4cae4c] font-bold">Completed</td>
           <td>⋮</td>
         </tr>
 
@@ -60,7 +52,7 @@ const TestRecordsSection = () => (
           <td>Sep 10, 2025</td>
           <td>01:00 PM</td>
           <td>CSE303</td>
-          <td style={{ color: '#3b6fc2', fontWeight: 'bold' }}>Upcoming</td>
+          <td className="text-[#3b6fc2] font-bold">Upcoming</td>
           <td>⋮</td>
         </tr>
 
@@ -70,7 +62,7 @@ const TestRecordsSection = () => (
           <td>Sep 15, 2025</td>
           <td>08:45 AM</td>
           <td>NPTEL</td>
-          <td style={{ color: '#3b6fc2', fontWeight: 'bold' }}>Upcoming</td>
+          <td className="text-[#3b6fc2] font-bold">Upcoming</td>
           <td>⋮</td>
         </tr>
 
@@ -80,7 +72,7 @@ const TestRecordsSection = () => (
           <td>Sep 20, 2025</td>
           <td>11:15 AM</td>
           <td>AICTE FDP</td>
-          <td style={{ color: '#3b6fc2', fontWeight: 'bold' }}>Upcoming</td>
+          <td className="text-[#3b6fc2] font-bold">Upcoming</td>
           <td>⋮</td>
         </tr>
 
@@ -90,7 +82,7 @@ const TestRecordsSection = () => (
           <td>Sep 25, 2025</td>
           <td>02:15 PM</td>
           <td>NPTEL</td>
-          <td style={{ color: '#3b6fc2', fontWeight: 'bold' }}>Upcoming</td>
+          <td className="text-[#3b6fc2] font-bold">Upcoming</td>
           <td>⋮</td>
         </tr>
 
@@ -100,22 +92,13 @@ const TestRecordsSection = () => (
           <td>Sep 28, 2025</td>
           <td>02:00 PM</td>
           <td>CSE303</td>
-          <td style={{ color: '#3b6fc2', fontWeight: 'bold' }}>Upcoming</td>
+          <td className="text-[#3b6fc2] font-bold">Upcoming</td>
           <td>⋮</td>
         </tr>
       </tbody>
     </table>
 
-    <div
-      style={{
-        textAlign: 'right',
-        color: '#3b6fc2',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        fontSize: '0.95rem',
-        marginTop: '0.5rem',
-      }}
-    >
+    <div className='text-right text-[#3b6fc2] mt-2 cursor-pointer font-bold text-[0.95rem] '>
       View all →
     </div>
   </div>

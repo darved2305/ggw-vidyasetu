@@ -106,7 +106,7 @@ const NavbarSection = () => (
       <span className="navbar-avatar-btn" tabIndex={0} aria-label="Ram Vyas profile">
         <span className="navbar-avatar">RV</span>
         <span className="navbar-avatar-dot" />
-        <span className="navbar-tooltip" style={{ top: '110%' }}>Ram Vyas</span>
+        <span className="navbar-tooltip top-[110%]">Ram Vyas</span>
       </span>
     </div>
   </nav>
