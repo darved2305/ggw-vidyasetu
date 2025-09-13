@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { 
   BookOpen, 
   Award, 
@@ -12,17 +12,51 @@ import {
   CheckCircle, 
   Settings, 
   Bell, 
-  LogOut 
+  LogOut,
+  ChevronDown,
+  Eye
 } from 'lucide-react'
 
 const SidebarSection = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen)
+  }
+
   return (
     <aside className="w-64 min-h-screen bg-blue-500 text-white font-sans flex flex-col">
-      <div className="flex items-center gap-3 p-5 border-b border-white border-opacity-10">
-        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-blue-500 font-bold text-xs">
-          RV
+      <div className="flex items-center justify-between p-5 border-b border-white border-opacity-10 relative">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-blue-500 font-bold text-xs">
+            RV
+          </div>
+          <span className="font-semibold text-sm">Welcome, Ram Vyas!</span>
         </div>
-        <span className="font-semibold text-sm">Welcome, Ram Vyas!</span>
+        
+        <div className="relative">
+          <button 
+            onClick={toggleDropdown}
+            className="flex items-center gap-1 hover:bg-blue-600 rounded p-2 transition-colors"
+          >
+            <ChevronDown className="w-4 h-4" />
+          </button>
+          
+          {isDropdownOpen && (
+            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border z-50">
+              <div className="py-2">
+                <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                  <Eye className="w-4 h-4" />
+                  View Details
+                </button>
+                <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                  <LogOut className="w-4 h-4" />
+                  Logout
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <nav className="py-4 flex-1 flex flex-col">
@@ -102,11 +136,11 @@ const SidebarSection = () => {
             <Bell className="w-4 h-4 mr-3" />
             Notification Preferences
           </div>
-        </div>
-
-        <div className="flex items-center px-4 py-3 text-sm cursor-pointer hover:underline transition-all duration-200 mt-auto">
-          <LogOut className="w-4 h-4 mr-3" />
-          Logout
+          
+          <div className="flex items-center px-4 py-3 text-sm cursor-pointer hover:underline transition-all duration-200">
+            <LogOut className="w-4 h-4 mr-3" />
+            Logout
+          </div>
         </div>
       </nav>
     </aside>
