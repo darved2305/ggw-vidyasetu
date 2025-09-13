@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo1 from '../assets/logo.svg';
 
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const [mobileNav, setMobileNav] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     {
@@ -181,9 +183,9 @@ export default function Navbar() {
               </button>
               {openMenu === 'login' && (
                 <ul className="absolute right-0 mt-2 bg-white shadow-lg rounded-md min-w-[160px] py-2 z-50 text-base font-medium text-gray-800">
-                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => window.location.href = '/student-login'}>Student Login</li>
-                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => window.location.href = '/faculty-login'}>Faculty Login</li>
-                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => window.location.href = '/institute-login'}>Institute Login</li>
+                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => { setOpenMenu(null); navigate('/student-login'); }}>Student Login</li>
+                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => { setOpenMenu(null); navigate('/faculty-login'); }}>Faculty Login</li>
+                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => { setOpenMenu(null); navigate('/institute-login'); }}>Institute Login</li>
                 </ul>
               )}
             </div>

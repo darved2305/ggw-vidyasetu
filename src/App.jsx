@@ -4,6 +4,7 @@ import FacultyPage from './FacultyPage.jsx';
 import HomePage from './HomePage.jsx';
 import StudentPage from './StudentPage.jsx';
 import AdminPage from './AdminPage.jsx';
+import StudentLogin from './StudentLogin.jsx';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Route path='/faculty' element={<FacultyPage />} />
       <Route path='/student' element={<StudentPage />} />
       <Route path='/admin' element={<AdminPage />} />
+      <Route path='/student-login' element={<StudentLogin />} />
     </Routes>
       
     
