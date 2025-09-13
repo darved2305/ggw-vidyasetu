@@ -6,9 +6,9 @@ const Sidebar = () => {
         { name: 'Shraddha Mishra' },
     ]
   return (
-    <div className='w-64 h-screen bg-gray-100'>
+    <div className='w-[25%] h-screen bg-gray-100'>
         <div className='flex justify-between items-center p-4 border-b'>
-            <h1>Welcome, {Details[0].name}</h1>
+            <h1>Welcome, {Details.map(detail => detail.name)}</h1>
             <button>{">>"}</button>
         </div>
     </div>
