@@ -32,38 +32,10 @@ const HeaderSection = () => (
       />
       <div className="header-semester">Semester 3 of 8</div>
     </div>
-
-    <div className="header-calendar">
-      <div className="header-calendar-title">September</div>
-      <table className="header-calendar-table" aria-label="September calendar">
-        <thead>
-          <tr>
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-          </tr>
-        </thead>
-        <tbody>
-          {calendarRows.map((row, i) => (
-            <tr key={i}>
-              {row.map((day, j) => (
-                <td
-                  key={j}
-                  className={day === 2 ? 'calendar-today' : ''}
-                  aria-label={day ? `Day ${day}` : undefined}
-                >
-                  {day || ''}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+      <div className="header-images">
+        <img src="/src/assets/nsslogo.jpg" alt="NSS Logo" className="header-side-img" />
+        <img src="/src/assets/pmnarendramodi.jpg.png" alt="Narendra Modi" className="header-side-img" />
+      </div>
   </header>
 );
 

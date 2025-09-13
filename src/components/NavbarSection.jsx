@@ -86,23 +86,6 @@ const NavbarSection = () => (
         </svg>
         <span className="navbar-tooltip">Download Document</span>
       </span>
-      <span className="navbar-icon-btn" tabIndex={0} aria-label="Upload Document">
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#222"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="3" y="3" width="18" height="18" rx="2" />
-          <path d="M12 16V8" />
-          <path d="M8 12l4-4 4 4" />
-        </svg>
-        <span className="navbar-tooltip">Upload Document</span>
-      </span>
       <span className="navbar-avatar-btn" tabIndex={0} aria-label="Ram Vyas profile">
         <span className="navbar-avatar">RV</span>
         <span className="navbar-avatar-dot" />
