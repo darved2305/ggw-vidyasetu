@@ -171,36 +171,22 @@ export default function Navbar() {
               </div>
             </div>
 
-            <button
-              style={{
-                background: '#000',
-                color: '#fff',
-                borderRadius: 6,
-                padding: '8px 24px',
-                fontWeight: 600,
-                fontSize: 16,
-                border: 'none',
-                marginRight: 12,
-                cursor: 'pointer',
-              }}
-            >
-              Student Login
-            </button>
-
-            <button
-              style={{
-                background: 'transparent',
-                color: '#000',
-                borderRadius: 6,
-                padding: '8px 24px',
-                fontWeight: 600,
-                fontSize: 16,
-                border: '2px solid #000',
-                cursor: 'pointer',
-              }}
-            >
-              Faculty Login
-            </button>
+            <div className="relative mr-3">
+              <button
+                className="bg-white text-black border-2 border-black rounded-md px-6 py-2 font-semibold text-base cursor-pointer flex items-center gap-1"
+                onClick={() => setOpenMenu(openMenu === 'login' ? null : 'login')}
+                type="button"
+              >
+                Login <span className="text-sm ml-1">▼</span>
+              </button>
+              {openMenu === 'login' && (
+                <ul className="absolute right-0 mt-2 bg-white shadow-lg rounded-md min-w-[160px] py-2 z-50 text-base font-medium text-gray-800">
+                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => window.location.href = '/student-login'}>Student Login</li>
+                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => window.location.href = '/faculty-login'}>Faculty Login</li>
+                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => window.location.href = '/institute-login'}>Institute Login</li>
+                </ul>
+              )}
+            </div>
           </div>
 
           <nav
