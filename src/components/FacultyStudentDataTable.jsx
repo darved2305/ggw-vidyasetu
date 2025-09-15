@@ -77,6 +77,14 @@ const FacultyStudentDataTable = () => {
                 <td className="py-4 px-6">
                   {getVerificationBadge(element.verification)}
                 </td>
+                <td className="py-4 px-6">
+                  <button
+                    onClick={() => generateStudentPortfolio(element)}
+                    className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 transition-colors"
+                  >
+                    Generate Portfolio
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

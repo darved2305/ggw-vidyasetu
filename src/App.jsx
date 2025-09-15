@@ -9,7 +9,7 @@ import Preloader from './components/Preloader.jsx';
 import { useState, useEffect } from 'react';
 
 export default function App() {
-  const [loading, setLoading] = useState(() => !localStorage.getItem('preloaderShown'));
+ const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (loading) {

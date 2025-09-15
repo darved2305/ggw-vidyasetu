@@ -1,0 +1,5 @@
+- [x] Install jspdf and html2canvas for PDF generation
+- [ ] Create PortfolioGenerator component to render resume HTML
+- [ ] Add "Generate Portfolio" button to FacultyStudentDataTable rows
+- [ ] Implement PDF generation on button click
+- [ ] Test the functionality
