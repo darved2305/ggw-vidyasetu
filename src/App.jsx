@@ -5,8 +5,21 @@ import StudentPage from './StudentPage.jsx';
 import AdminPage from './AdminPage.jsx';
 import StudentLogin from './StudentLogin.jsx';
 import UploadDocs from './components/UploadDocs.jsx';
+import Preloader from './components/Preloader.jsx';
+import { useState, useEffect } from 'react';
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Preloader />;
+  }
+
   return (
     <Routes>
       <Route path='/' element={<HomePage />} />
@@ -16,5 +29,5 @@ export default function App() {
       <Route path='/student-login' element={<StudentLogin />} />
       <Route path='/upload-documents' element={<UploadDocs />} />
     </Routes>
-  )
+  );
 }
