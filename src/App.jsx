@@ -4,6 +4,7 @@ import HomePage from './HomePage.jsx';
 import StudentPage from './StudentPage.jsx';
 import AdminPage from './AdminPage.jsx';
 import StudentLogin from './StudentLogin.jsx';
+import FacultyLogin from './FacultyLogin.jsx';
 import StudentProfile from './StudentProfile.jsx';
 import UploadDocs from './components/UploadDocs.jsx';
 import Preloader from './components/Preloader.jsx';
@@ -30,6 +31,7 @@ export default function App() {
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/faculty' element={<FacultyPage />} />
+      <Route path='/faculty-login' element={<FacultyLogin />} />
       <Route path='/student' element={<StudentPage />} />
       <Route path='/admin' element={<AdminPage />} />
       <Route path='/student-login' element={<StudentLogin />} />
