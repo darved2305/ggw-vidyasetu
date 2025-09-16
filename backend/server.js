@@ -40,14 +40,26 @@ app.use((req, res, next) => {
   const timestamp = new Date().toISOString();
   console.log(`📥 [${timestamp}] ${req.method} ${req.path} - IP: ${req.ip}`);
   
-  // Log request body for POST/PUT requests (exclude sensitive data)
-  if ((req.method === 'POST' || req.method === 'PUT') && req.path !== '/api/auth/student-login') {
-    console.log('📦 Request Body:', req.body);
-  } else if (req.path === '/api/auth/student-login') {
-    console.log('📦 Login Request Body:', { 
-      studentId: req.body?.studentId, 
+  // // Log request body for POST/PUT requests (exclude sensitive data)
+  // if ((req.method === 'POST' || req.method === 'PUT') && req.path !== '/api/auth/student-login') {
+  //   console.log('📦 Request Body:', req.body);
+  // } else if (req.path === '/api/auth/student-login') {
+  //   console.log('📦 Login Request Body:', { 
+  //     studentId: req.body?.studentId, 
+  //     password: req.body?.password ? '[HIDDEN]' : 'Not provided' 
+  //   });
+  // }
+
+  if ((req.method === 'POST' || req.method === 'PUT') && !req.path.includes('login')) {
+  console.log('📦 Request Body:', req.body);
+    } else if (req.path === '/api/auth/student-login' || req.path === '/api/auth/faculty-login') {
+      console.log('📦 Login Request Body:', { 
+        id: req.body?.studentId || req.body?.facultyId,
       password: req.body?.password ? '[HIDDEN]' : 'Not provided' 
-    });
+  });
+}
+  else{
+    console.log("Error at THIS POINT - CODE5572")
   }
   
   next();
@@ -170,7 +182,9 @@ app.use((req, res) => {
       'GET /api/health',
       'GET /api/test', 
       'POST /api/auth/student-login',
+      'POST /api/auth/faculty-login',
       'GET /api/auth/student-profile',
+      'GET /api/auth/faculty-profile',
       'PUT /api/auth/update-details',
       'GET /api/auth/verify-token'
     ]
