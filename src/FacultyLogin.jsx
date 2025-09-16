@@ -9,7 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const FacultyLogin = () => {
-  const [facultyId, setFacultyId] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +21,7 @@ const FacultyLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!facultyId) {
+    if (!email) {
       setError("Faculty ID is required");
       return;
     }
@@ -37,12 +37,12 @@ const FacultyLogin = () => {
     try {
       const res = await axios.post(
         "http://localhost:5000/api/auth/faculty-login",
-        { facultyId, password, rememberMe }
+        { email, password, rememberMe }
       );
 
       if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
-        alert("Welcome " + res.data.faculty.facultyName);
+        localStorage.setItem("facultyToken", res.data.token);
+        alert("Welcome " + res.data.faculty.name);
         navigate("/faculty");
       } else {
         setError(res.data.message || "Login failed. Please try again.");
@@ -81,17 +81,17 @@ const FacultyLogin = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              htmlFor="facultyId"
+              htmlFor="email"
               className="block text-[#2176c7] font-semibold mb-1 text-left"
             >
-              Enter Faculty ID
+              Enter Faculty Email ID
             </label>
             <input
-              id="facultyId"
+              id="email"
               type="text"
-              value={facultyId}
-              onChange={(e) => setFacultyId(e.target.value)}
-              placeholder="Your Faculty ID"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              placeholder="Faculty Email ID"
               className="student-login-input w-full px-4 py-3 rounded-lg border-2 border-[#b2e4ee] text-base mb-2 focus:outline-none focus:border-[#2176c7]"
               required
               autoComplete="off"
