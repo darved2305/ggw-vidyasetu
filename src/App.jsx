@@ -4,6 +4,7 @@ import HomePage from './HomePage.jsx';
 import StudentPage from './StudentPage.jsx';
 import AdminPage from './AdminPage.jsx';
 import StudentLogin from './StudentLogin.jsx';
+import StudentProfile from './StudentProfile.jsx';
 import UploadDocs from './components/UploadDocs.jsx';
 import Preloader from './components/Preloader.jsx';
 import { useState, useEffect } from 'react';
@@ -32,6 +33,7 @@ export default function App() {
       <Route path='/student' element={<StudentPage />} />
       <Route path='/admin' element={<AdminPage />} />
       <Route path='/student-login' element={<StudentLogin />} />
+      <Route path='/student-profile' element={<StudentProfile />} />
       <Route path='/upload-documents' element={<UploadDocs />} />
     </Routes>
   );
