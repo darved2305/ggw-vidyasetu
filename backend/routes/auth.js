@@ -377,4 +377,274 @@ router.get('/verify-faculty-token', verifyFacultyToken, async (req, res) => {
   }
 });
 
+
+//NEW ROUTES - TO BE REVISED FURTHER BEFORE PRESENTATION
+
+// Add this route after your existing faculty routes in auth.js
+
+// Get all students - Faculty only access
+router.get('/faculty/students', verifyFacultyToken, async (req, res) => {
+  try {
+    // Optional: Add pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 50;
+    const skip = (page - 1) * limit;
+
+    // Fetch students with only required fields
+    const students = await Student.find({})
+      .select('studentName studentId deptName email collegeName currentYear yearOfAdmission')
+      .sort({ studentName: 1 }) // Sort by name
+      .skip(skip)
+      .limit(limit);
+
+    // Get total count for pagination
+    const totalStudents = await Student.countDocuments();
+
+    res.json({
+      success: true,
+      students,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(totalStudents / limit),
+        totalStudents,
+        hasNext: page < Math.ceil(totalStudents / limit),
+        hasPrev: page > 1
+      }
+    });
+  } catch (error) {
+    console.error('Get students error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error'
+    });
+  }
+});
+
+// // Get specific student by ID - Faculty only access
+// router.get('/faculty/students/:studentId', verifyFacultyToken, async (req, res) => {
+//   try {
+//     const { studentId } = req.params;
+
+//     const student = await Student.findOne({ studentId })
+//       .select('-studentPassword'); // Exclude password
+
+//     if (!student) {
+//       return res.status(404).json({
+//         success: false,
+//         message: 'Student not found'
+//       });
+//     }
+
+//     res.json({
+//       success: true,
+//       student
+//     });
+//   } catch (error) {
+//     console.error('Get student by ID error:', error);
+//     res.status(500).json({
+//       success: false,
+//       message: 'Internal server error'
+//     });
+//   }
+// });
+
+// // Faculty search students (enhanced existing route)
+// router.get('/faculty/search', verifyFacultyToken, async (req, res) => {
+//   try {
+//     const { query, department, year } = req.query;
+    
+//     if (!query && !department && !year) {
+//       return res.status(400).json({ 
+//         success: false, 
+//         message: 'At least one search parameter required' 
+//       });
+//     }
+
+//     // Build search criteria
+//     let searchCriteria = {};
+    
+//     if (query) {
+//       searchCriteria.$or = [
+//         { studentName: { $regex: query, $options: 'i' } },
+//         { studentId: { $regex: query, $options: 'i' } },
+//         { email: { $regex: query, $options: 'i' } },
+//         { collegeName: { $regex: query, $options: 'i' } }
+//       ];
+//     }
+    
+//     if (department) {
+//       searchCriteria.deptName = { $regex: department, $options: 'i' };
+//     }
+    
+//     if (year) {
+//       searchCriteria.currentYear = parseInt(year);
+//     }
+
+//     const students = await Student.find(searchCriteria)
+//       .select('studentName studentId deptName email collegeName currentYear yearOfAdmission')
+//       .sort({ studentName: 1 })
+//       .limit(100); // Limit search results
+
+//     res.json({ 
+//       success: true, 
+//       results: students,
+//       count: students.length 
+//     });
+//   } catch (error) {
+//     console.error('Faculty search error:', error);
+//     res.status(500).json({ 
+//       success: false, 
+//       message: 'Internal server error' 
+//     });
+//   }
+// });
+
+// Faculty search students (generic query supported)
+router.get('/faculty/search', verifyFacultyToken, async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Search query required' 
+      });
+    }
+
+    // Build generic search criteria
+    let searchCriteria = {
+      $or: [
+        { studentName: { $regex: query, $options: 'i' } },
+        { studentId: { $regex: query, $options: 'i' } },
+        { email: { $regex: query, $options: 'i' } },
+        { collegeName: { $regex: query, $options: 'i' } },
+        { deptName: { $regex: query, $options: 'i' } } // added back for dept search
+      ]
+    };
+
+    // Optional: if query looks numeric, also try matching currentYear
+    if (!isNaN(query)) {
+      searchCriteria.$or.push({ currentYear: parseInt(query) });
+    }
+
+    const students = await Student.find(searchCriteria)
+      .select('studentName studentId deptName email collegeName currentYear yearOfAdmission')
+      .sort({ studentName: 1 })
+      .limit(100);
+
+    res.json({ 
+      success: true, 
+      results: students,
+      count: students.length 
+    });
+  } catch (error) {
+    console.error('Faculty search error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Internal server error' 
+    });
+  }
+});
+
+
+// Additional middleware for admin access (to be implemented)
+const verifyAdminToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: 'Access token required'
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (decoded.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Admin access required'
+      });
+    }
+    req.admin = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid or expired token'
+    });
+  }
+};
+
+// Middleware for faculty OR admin access
+const verifyFacultyOrAdminToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: 'Access token required'
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (decoded.role !== 'faculty' && decoded.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Faculty or Admin access required'
+      });
+    }
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid or expired token'
+    });
+  }
+};
+
+// Alternative route with faculty OR admin access
+router.get('/students', verifyFacultyOrAdminToken, async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 50;
+    const skip = (page - 1) * limit;
+
+    const students = await Student.find({})
+      .select('studentName studentId deptName email collegeName currentYear yearOfAdmission')
+      .sort({ studentName: 1 })
+      .skip(skip)
+      .limit(limit);
+
+    const totalStudents = await Student.countDocuments();
+
+    res.json({
+      success: true,
+      students,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(totalStudents / limit),
+        totalStudents,
+        hasNext: page < Math.ceil(totalStudents / limit),
+        hasPrev: page > 1
+      }
+    });
+  } catch (error) {
+    console.error('Get students error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error'
+    });
+  }
+});
+
+
+
+
+
+
 export default router;
