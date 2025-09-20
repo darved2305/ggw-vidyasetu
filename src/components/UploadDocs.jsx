@@ -9,13 +9,12 @@ const App = () => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
-    student_id: '',
     category: '',
-    title: '',
     description: '',
     date_done: '',
     organizer: '',
     duration: '',
+    credential_link: '',
     file: null
   });
 
@@ -38,7 +37,8 @@ const App = () => {
       dateUploaded: '2024/01/10',
       fileSize: '1.2 MB',
       fileType: 'PDF',
-      status: 'Pending'
+      status: 'Pending',
+      credentialLink: 'https://coursera.org/verify/abc123'
     },
     {
       id: 3,
@@ -142,13 +142,12 @@ const App = () => {
 
   const resetForm = () => {
     setFormData({
-      student_id: '',
       category: '',
-      title: '',
       description: '',
       date_done: '',
       organizer: '',
       duration: '',
+      credential_link: '',
       file: null
     });
   };
@@ -233,6 +232,11 @@ const App = () => {
                         <div>
                           <div className="font-medium text-gray-900">{doc.title}</div>
                           <div className="text-sm text-gray-500">{doc.fileType}</div>
+                          {doc.credentialLink && (
+                            <div className="text-xs text-blue-600 mt-1">
+                              Certificate link: {doc.credentialLink}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </td>
@@ -354,21 +358,6 @@ const App = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Student ID
-                    </label>
-                    <input
-                      type="text"
-                      name="student_id"
-                      value={formData.student_id}
-                      onChange={updateFormData}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                      placeholder="Enter your student ID"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Category
                     </label>
                     <select
@@ -387,20 +376,37 @@ const App = () => {
                     </select>
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Title
+                      Organizer/Institution
                     </label>
                     <input
                       type="text"
-                      name="title"
-                      value={formData.title}
+                      name="organizer"
+                      value={formData.organizer}
                       onChange={updateFormData}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                      placeholder="Enter document title"
+                      placeholder="Enter organizer name"
                       required
                     />
                   </div>
+
+                  {formData.category === 'Certificates' && (
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Credential Link
+                      </label>
+                      <input
+                        type="url"
+                        name="credential_link"
+                        value={formData.credential_link}
+                        onChange={updateFormData}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                        placeholder="Enter certificate verification link"
+                        required
+                      />
+                    </div>
+                  )}
 
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -433,21 +439,6 @@ const App = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Organizer/Institution
-                    </label>
-                    <input
-                      type="text"
-                      name="organizer"
-                      value={formData.organizer}
-                      onChange={updateFormData}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                      placeholder="Enter organizer name"
-                      required
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Duration
                     </label>
                     <input
@@ -461,6 +452,14 @@ const App = () => {
                     />
                   </div>
                 </div>
+
+                {formData.credential_link && formData.category === 'Certificates' && (
+                  <div className="mt-6 p-4 bg-white rounded-lg border border-blue-200">
+                    <p className="text-sm text-gray-700">
+                      <span className="font-medium">Certificate link:</span> {formData.credential_link}
+                    </p>
+                  </div>
+                )}
               </div>
               
               <div className="flex justify-end gap-4 pt-4 border-t border-gray-200">
