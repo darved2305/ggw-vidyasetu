@@ -230,13 +230,6 @@ const FacultySidebar = ({ onMenuSelect, onLogout }) => {
   const menuItems = {
     academic: [
       {
-        id: 'search-students',
-        icon: <BsSearch className="text-lg min-w-4" />,
-        label: 'Search Students',
-        endpoint: '/api/auth/faculty/search',
-        description: 'Search and view student records'
-      },
-      {
         id: 'view-students',
         icon: <BsFillPersonLinesFill className="text-lg min-w-4" />,
         label: 'View All Students',
@@ -317,13 +310,6 @@ const FacultySidebar = ({ onMenuSelect, onLogout }) => {
         endpoint: '/api/auth/update-faculty',
         description: 'Update faculty account settings'
       },
-      {
-        id: 'notifications',
-        icon: <MdNotificationsActive className="text-lg min-w-4" />,
-        label: 'Notification Preferences',
-        endpoint: null,
-        description: 'Manage notification settings (To be implemented)'
-      }
     ]
   };
 
