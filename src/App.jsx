@@ -13,6 +13,7 @@ import FacultySettings from './FacultySettings.jsx';
 import FacultyProfile from './FacultyProfile.jsx';
 import AdminLogin from './AdminLogin.jsx';
 import { useState, useEffect } from 'react';
+import AdminDashboard from './AdminDashboard.jsx';
 
 export default function App() {
  const [loading, setLoading] = useState(true);
@@ -45,6 +46,7 @@ export default function App() {
       <Route path='/faculty-settings' element={<FacultySettings />} />
       <Route path='/faculty-profile' element={<FacultyProfile />} />
       <Route path='/admin-login' element={<AdminLogin />} />
+      <Route path='/admin-dashboard' element={<AdminDashboard />} />
     </Routes>
   );
 }
