@@ -247,8 +247,8 @@ const FacultySidebar = ({ onMenuSelect, onLogout }) => {
         id: 'academic-records',
         icon: <BsCalendar3 className="text-lg min-w-4" />,
         label: 'View Academic Records',
-        endpoint: null,
-        description: 'View student academic records (To be implemented)'
+        endpoint: '/api/auth/faculty/academic-records',
+        description: 'View student academic records'
       },
       {
         id: 'certificates',
@@ -261,22 +261,22 @@ const FacultySidebar = ({ onMenuSelect, onLogout }) => {
         id: 'work-experiences',
         icon: <BsClipboard2Fill className="text-lg min-w-4" />,
         label: 'View Work Experiences',
-        endpoint: null,
-        description: 'View student work experiences (To be implemented)'
+        endpoint: '/api/auth/faculty/work-experiences',
+        description: 'View student work experiences'
       },
       {
         id: 'student-report',
         icon: <BsFillPieChartFill className="text-lg min-w-4" />,
         label: 'Generate Student Report',
-        endpoint: null,
-        description: 'Generate comprehensive student reports (To be implemented)'
+        endpoint: '/api/auth/faculty/student-report',
+        description: 'Generate comprehensive student reports'
       },
       {
         id: 'competitions',
         icon: <BsLaptop className="text-lg min-w-4" />,
         label: 'View Competitions',
-        endpoint: null,
-        description: 'View student competitions (To be implemented)'
+        endpoint: '/api/auth/faculty/competitions',
+        description: 'View student competitions'
       },
       {
         id: 'course-plan',

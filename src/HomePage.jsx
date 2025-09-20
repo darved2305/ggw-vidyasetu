@@ -40,6 +40,7 @@ const HomePage = () => {
                                           : s.title === 'Other Student Services' ? otherLogo
                                               : ''
                           }
+                          serviceType="student"
                       />
                   ))}
               </div>
@@ -67,12 +68,13 @@ const HomePage = () => {
                                           : s.title === 'Other Institutional Services' ? servicesLogo
                                               : ''
                           }
+                          serviceType="faculty"
                       />
                   ))}
               </div>
           </Section>
-            
-          <Footer />    
+
+          <Footer />
     </>
   )
 }

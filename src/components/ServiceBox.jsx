@@ -1,4 +1,16 @@
-export default function ServiceBox({ title, desc, boxColor, logoUrl }) {
+import { useNavigate } from 'react-router-dom';
+
+export default function ServiceBox({ title, desc, boxColor, logoUrl, serviceType = 'student' }) {
+  const navigate = useNavigate();
+
+  const handleKnowMore = () => {
+    if (serviceType === 'faculty') {
+      navigate('/faculty-login');
+    } else {
+      navigate('/student-login');
+    }
+  };
+
   const cardStyle = {
     background: boxColor,
     borderRadius: 18,
@@ -66,7 +78,7 @@ export default function ServiceBox({ title, desc, boxColor, logoUrl }) {
         <h3 style={titleStyle}>{title}</h3>
       </div>
       <p style={descStyle}>{desc}</p>
-      <button className="cta" style={buttonStyle}>
+      <button className="cta" style={buttonStyle} onClick={handleKnowMore}>
         Know More &nbsp; <span className="text-[18px]">&rarr;</span>
       </button>
     </article>
