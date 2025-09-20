@@ -15,6 +15,7 @@ import AdminLogin from './AdminLogin.jsx';
 import WorkExperiences from './components/WorkExperiences.jsx';
 import Competitions from './components/Competitions.jsx';
 import { useState, useEffect } from 'react';
+import AdminDashboard from './AdminDashboard.jsx';
 
 export default function App() {
  const [loading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ export default function App() {
       <Route path='/faculty-settings' element={<FacultySettings />} />
       <Route path='/faculty-profile' element={<FacultyProfile />} />
       <Route path='/admin-login' element={<AdminLogin />} />
+      <Route path='/admin-dashboard' element={<AdminDashboard />} />
       <Route path='/work-experiences' element={<WorkExperiences />} />
       <Route path='/competitions' element={<Competitions />} />
     </Routes>
