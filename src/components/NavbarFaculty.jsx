@@ -806,7 +806,7 @@ useEffect(() => {
                   <div
                     onClick={() => {
                       setShowDropdown(false);
-                      window.location.href = '/faculty';
+                      window.location.href = '/faculty-dashboard';
                     }}
                     style={{
                       padding: '10px 16px',

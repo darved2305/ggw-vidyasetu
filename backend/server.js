@@ -50,17 +50,21 @@ app.use((req, res, next) => {
   //   });
   // }
 
-  if ((req.method === 'POST' || req.method === 'PUT') && !req.path.includes('login')) {
+if ((req.method === 'POST' || req.method === 'PUT') && !req.path.includes('login')) {
   console.log('📦 Request Body:', req.body);
-    } else if (req.path === '/api/auth/student-login' || req.path === '/api/auth/faculty-login') {
-      console.log('📦 Login Request Body:', { 
-        id: req.body?.studentId || req.body?.facultyId,
-      password: req.body?.password ? '[HIDDEN]' : 'Not provided' 
+} else if (
+  req.path === '/api/auth/student-login' ||
+  req.path === '/api/auth/faculty-login' ||
+  req.path === '/api/auth/admin-login'
+) {
+  console.log('📦 Login Request Body:', {
+    id: req.body?.studentId || req.body?.facultyId || req.body?.adminId,
+    password: req.body?.password ? '[HIDDEN]' : 'Not provided'
   });
+} else {
+  console.log('Error at THIS POINT - CODE5572');
 }
-  else{
-    console.log("Error at THIS POINT - CODE5572")
-  }
+
   
   next();
 });

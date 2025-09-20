@@ -185,7 +185,7 @@ export default function Navbar() {
                 <ul className="absolute right-0 mt-2 bg-white shadow-lg rounded-md min-w-[160px] py-2 z-50 text-base font-medium text-gray-800">
                   <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => { setOpenMenu(null); navigate('/student-login'); }}>Student Login</li>
                   <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => { setOpenMenu(null); navigate('/faculty-login'); }}>Faculty Login</li>
-                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => { setOpenMenu(null); navigate('/institute-login'); }}>Institute Login</li>
+                  <li className="px-5 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => { setOpenMenu(null); navigate('/admin-login'); }}>Institute Login</li>
                 </ul>
               )}
             </div>
