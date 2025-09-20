@@ -12,6 +12,8 @@ import FacultyDashboard from './FacultyDashboard.jsx';
 import FacultySettings from './FacultySettings.jsx';
 import FacultyProfile from './FacultyProfile.jsx';
 import AdminLogin from './AdminLogin.jsx';
+import WorkExperiences from './components/WorkExperiences.jsx';
+import Competitions from './components/Competitions.jsx';
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -45,6 +47,8 @@ export default function App() {
       <Route path='/faculty-settings' element={<FacultySettings />} />
       <Route path='/faculty-profile' element={<FacultyProfile />} />
       <Route path='/admin-login' element={<AdminLogin />} />
+      <Route path='/work-experiences' element={<WorkExperiences />} />
+      <Route path='/competitions' element={<Competitions />} />
     </Routes>
   );
 }
