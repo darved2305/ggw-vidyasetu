@@ -377,243 +377,243 @@
 
 
 
-// // // seedData.js - Script to add sample students to MongoDB
-// // import mongoose from 'mongoose';
-// // import bcrypt from 'bcrypt';
-// // import dotenv from 'dotenv';
+// seedData.js - Script to add sample students to MongoDB
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 
-// // // Load environment variables
-// // dotenv.config();
+// Load environment variables
+dotenv.config();
 
-// // // Student Schema (inline for this script)
-// // const studentSchema = new mongoose.Schema({
-// //   studentId: {
-// //     type: String,
-// //     required: true,
-// //     unique: true,
-// //     match: /^\d{12}$/,
-// //     index: true
-// //   },
-// //   studentPassword: {
-// //     type: String,
-// //     required: true,
-// //     minlength: 6
-// //   },
-// //   studentName: {
-// //     type: String,
-// //     required: true,
-// //     trim: true
-// //   },
-// //   collegeName: {
-// //     type: String,
-// //     required: true,
-// //     trim: true
-// //   },
-// //   deptName: {
-// //     type: String,
-// //     required: true,
-// //     trim: true
-// //   },
-// //   deptId: {
-// //     type: String,
-// //     required: true,
-// //     trim: true
-// //   },
-// //   email: {
-// //     type: String,
-// //     default: null,
-// //     trim: true,
-// //     lowercase: true
-// //   },
-// //   status: {
-// //     type: String,
-// //     enum: ['active', 'inactive', 'suspended'],
-// //     default: 'active'
-// //   },
-// //   academicYear: {
-// //     type: String,
-// //     trim: true
-// //   },
-// //   semester: {
-// //     type: String,
-// //     trim: true
-// //   },
-// //   phoneNumber: {
-// //     type: String,
-// //     trim: true
-// //   },
-// //   lastLogin: {
-// //     type: Date,
-// //     default: null
-// //   }
-// // }, {
-// //   timestamps: true
-// // });
+// Student Schema (inline for this script)
+const studentSchema = new mongoose.Schema({
+  studentId: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /^\d{12}$/,
+    index: true
+  },
+  studentPassword: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
+  studentName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  collegeName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  deptName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  deptId: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    default: null,
+    trim: true,
+    lowercase: true
+  },
+  status: {
+    type: String,
+    enum: ['active', 'inactive', 'suspended'],
+    default: 'active'
+  },
+  academicYear: {
+    type: String,
+    trim: true
+  },
+  semester: {
+    type: String,
+    trim: true
+  },
+  phoneNumber: {
+    type: String,
+    trim: true
+  },
+  lastLogin: {
+    type: Date,
+    default: null
+  }
+}, {
+  timestamps: true
+});
 
-// // // Hash password before saving
-// // studentSchema.pre('save', async function (next) {
-// //   if (!this.isModified('studentPassword')) return next();
-// //   try {
-// //     const salt = await bcrypt.genSalt(10);
-// //     this.studentPassword = await bcrypt.hash(this.studentPassword, salt);
-// //     next();
-// //   } catch (error) {
-// //     next(error);
-// //   }
-// // });
+// Hash password before saving
+studentSchema.pre('save', async function (next) {
+  if (!this.isModified('studentPassword')) return next();
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.studentPassword = await bcrypt.hash(this.studentPassword, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
-// // const Student = mongoose.model('Student', studentSchema);
+const Student = mongoose.model('Student', studentSchema);
 
-// // // Sample student data
-// // const sampleStudents = [
-// //   {
-// //     studentId: '202400000001',
-// //     studentPassword: 'Password123!',
-// //     studentName: 'Aarav Mehta',
-// //     collegeName: 'Vidyasetu College of Engineering',
-// //     deptName: 'Computer Science',
-// //     deptId: 'CSE01',
-// //     email: 'aarav.mehta@example.com',
-// //     status: 'active',
-// //     academicYear: '2024-2025',
-// //     semester: '5',
-// //     phoneNumber: '9876543210',
-// //     lastLogin: new Date('2025-09-01')
-// //   },
-// //   {
-// //     studentId: '202400000002',
-// //     studentPassword: 'SecurePass456',
-// //     studentName: 'Priya Sharma',
-// //     collegeName: 'Vidyasetu College of Engineering',
-// //     deptName: 'Information Technology',
-// //     deptId: 'IT01',
-// //     email: 'priya.sharma@example.com',
-// //     status: 'active',
-// //     academicYear: '2023-2024',
-// //     semester: '7',
-// //     phoneNumber: '9876501234',
-// //     lastLogin: new Date('2025-08-28')
-// //   },
-// //   {
-// //     studentId: '202400000003',
-// //     studentPassword: 'StrongPass789',
-// //     studentName: 'Rohan Gupta',
-// //     collegeName: 'Vidyasetu College of Business',
-// //     deptName: 'Management',
-// //     deptId: 'MGT01',
-// //     email: 'rohan.gupta@example.com',
-// //     status: 'inactive',
-// //     academicYear: '2022-2023',
-// //     semester: '3',
-// //     phoneNumber: '9123456789',
-// //     lastLogin: new Date('2025-07-15')
-// //   },
-// //   {
-// //     studentId: '202400000004',
-// //     studentPassword: 'MyPass111',
-// //     studentName: 'Sneha Iyer',
-// //     collegeName: 'Vidyasetu College of Arts',
-// //     deptName: 'English Literature',
-// //     deptId: 'ENG01',
-// //     email: 'sneha.iyer@example.com',
-// //     status: 'active',
-// //     academicYear: '2024-2025',
-// //     semester: '1',
-// //     phoneNumber: '9988776655',
-// //     lastLogin: new Date('2025-09-10')
-// //   },
-// //   {
-// //     studentId: '202400000005',
-// //     studentPassword: 'Pass@222',
-// //     studentName: 'Kabir Verma',
-// //     collegeName: 'Vidyasetu College of Science',
-// //     deptName: 'Physics',
-// //     deptId: 'PHY01',
-// //     email: 'kabir.verma@example.com',
-// //     status: 'suspended',
-// //     academicYear: '2021-2022',
-// //     semester: '6',
-// //     phoneNumber: '9001122334',
-// //     lastLogin: new Date('2025-06-22')
-// //   },
-// //   {
-// //     studentId: '202400000006',
-// //     studentPassword: 'Test@333',
-// //     studentName: 'Ananya Roy',
-// //     collegeName: 'Vidyasetu College of Engineering',
-// //     deptName: 'Electronics',
-// //     deptId: 'ECE01',
-// //     email: 'ananya.roy@example.com',
-// //     status: 'active',
-// //     academicYear: '2023-2024',
-// //     semester: '4',
-// //     phoneNumber: '9554433221',
-// //     lastLogin: new Date('2025-09-12')
-// //   },
-// //   {
-// //     studentId: '202400000007',
-// //     studentPassword: 'Welcome444',
-// //     studentName: 'Devansh Patel',
-// //     collegeName: 'Vidyasetu College of Engineering',
-// //     deptName: 'Mechanical',
-// //     deptId: 'MECH01',
-// //     email: 'devansh.patel@example.com',
-// //     status: 'active',
-// //     academicYear: '2024-2025',
-// //     semester: '2',
-// //     phoneNumber: '9112233445',
-// //     lastLogin: new Date('2025-09-05')
-// //   }
-// // ];
+// Sample student data
+const sampleStudents = [
+  {
+    studentId: '202400000001',
+    studentPassword: 'Password123!',
+    studentName: 'Aarav Mehta',
+    collegeName: 'Vidyasetu College of Engineering',
+    deptName: 'Computer Science',
+    deptId: 'CSE01',
+    email: 'aarav.mehta@example.com',
+    status: 'active',
+    academicYear: '2024-2025',
+    semester: '5',
+    phoneNumber: '9876543210',
+    lastLogin: new Date('2025-09-01')
+  },
+  {
+    studentId: '202400000002',
+    studentPassword: 'SecurePass456',
+    studentName: 'Priya Sharma',
+    collegeName: 'Vidyasetu College of Engineering',
+    deptName: 'Information Technology',
+    deptId: 'IT01',
+    email: 'priya.sharma@example.com',
+    status: 'active',
+    academicYear: '2023-2024',
+    semester: '7',
+    phoneNumber: '9876501234',
+    lastLogin: new Date('2025-08-28')
+  },
+  {
+    studentId: '202400000003',
+    studentPassword: 'StrongPass789',
+    studentName: 'Rohan Gupta',
+    collegeName: 'Vidyasetu College of Business',
+    deptName: 'Management',
+    deptId: 'MGT01',
+    email: 'rohan.gupta@example.com',
+    status: 'inactive',
+    academicYear: '2022-2023',
+    semester: '3',
+    phoneNumber: '9123456789',
+    lastLogin: new Date('2025-07-15')
+  },
+  {
+    studentId: '202400000004',
+    studentPassword: 'MyPass111',
+    studentName: 'Sneha Iyer',
+    collegeName: 'Vidyasetu College of Arts',
+    deptName: 'English Literature',
+    deptId: 'ENG01',
+    email: 'sneha.iyer@example.com',
+    status: 'active',
+    academicYear: '2024-2025',
+    semester: '1',
+    phoneNumber: '9988776655',
+    lastLogin: new Date('2025-09-10')
+  },
+  {
+    studentId: '202400000005',
+    studentPassword: 'Pass@222',
+    studentName: 'Kabir Verma',
+    collegeName: 'Vidyasetu College of Science',
+    deptName: 'Physics',
+    deptId: 'PHY01',
+    email: 'kabir.verma@example.com',
+    status: 'suspended',
+    academicYear: '2021-2022',
+    semester: '6',
+    phoneNumber: '9001122334',
+    lastLogin: new Date('2025-06-22')
+  },
+  {
+    studentId: '202400000006',
+    studentPassword: 'Test@333',
+    studentName: 'Ananya Roy',
+    collegeName: 'Vidyasetu College of Engineering',
+    deptName: 'Electronics',
+    deptId: 'ECE01',
+    email: 'ananya.roy@example.com',
+    status: 'active',
+    academicYear: '2023-2024',
+    semester: '4',
+    phoneNumber: '9554433221',
+    lastLogin: new Date('2025-09-12')
+  },
+  {
+    studentId: '202400000007',
+    studentPassword: 'Welcome444',
+    studentName: 'Devansh Patel',
+    collegeName: 'Vidyasetu College of Engineering',
+    deptName: 'Mechanical',
+    deptId: 'MECH01',
+    email: 'devansh.patel@example.com',
+    status: 'active',
+    academicYear: '2024-2025',
+    semester: '2',
+    phoneNumber: '9112233445',
+    lastLogin: new Date('2025-09-05')
+  }
+];
 
-// // // Function to seed the database
-// // async function seedDatabase() {
-// //   try {
-// //     // Connect to MongoDB
-// //     console.log('🔄 Connecting to MongoDB...');
-// //     await mongoose.connect(process.env.MONGODB_URI, {
-// //       useNewUrlParser: true,
-// //       useUnifiedTopology: true
-// //     });
-// //     console.log('✅ Connected to MongoDB Atlas');
+// Function to seed the database
+async function seedDatabase() {
+  try {
+    // Connect to MongoDB
+    console.log('🔄 Connecting to MongoDB...');
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('✅ Connected to MongoDB Atlas');
 
-// //     // Clear existing students (optional)
-// //     console.log('🔄 Clearing existing students...');
-// //     await Student.deleteMany({});
-// //     console.log('✅ Existing students cleared');
+    // Clear existing students (optional)
+    console.log('🔄 Clearing existing students...');
+    await Student.deleteMany({});
+    console.log('✅ Existing students cleared');
 
-// //     // Insert sample students
-// //     console.log('🔄 Inserting sample students...');
-// //     for (const studentData of sampleStudents) {
-// //       const student = new Student(studentData);
-// //       await student.save();
-// //       console.log(`✅ Added student: ${student.studentName} (${student.studentId})`);
-// //     }
+    // Insert sample students
+    console.log('🔄 Inserting sample students...');
+    for (const studentData of sampleStudents) {
+      const student = new Student(studentData);
+      await student.save();
+      console.log(`✅ Added student: ${student.studentName} (${student.studentId})`);
+    }
 
-// //     console.log('🎉 Sample data inserted successfully!');
-// //     console.log('\n📋 Sample Login Credentials:');
-// //     console.log('================================');
+    console.log('🎉 Sample data inserted successfully!');
+    console.log('\n📋 Sample Login Credentials:');
+    console.log('================================');
 
-// //     sampleStudents.forEach((student, index) => {
-// //       console.log(`${index + 1}. Student ID: ${student.studentId}`);
-// //       console.log(`   Password: ${student.studentPassword}`);
-// //       console.log(`   Name: ${student.studentName}`);
-// //       console.log(`   College: ${student.collegeName}`);
-// //       console.log('   -------------------------');
-// //     });
+    sampleStudents.forEach((student, index) => {
+      console.log(`${index + 1}. Student ID: ${student.studentId}`);
+      console.log(`   Password: ${student.studentPassword}`);
+      console.log(`   Name: ${student.studentName}`);
+      console.log(`   College: ${student.collegeName}`);
+      console.log('   -------------------------');
+    });
 
-// //   } catch (error) {
-// //     console.error('❌ Error seeding database:', error);
-// //   } finally {
-// //     // Close database connection
-// //     await mongoose.connection.close();
-// //     console.log('🔌 Database connection closed');
-// //     process.exit(0);
-// //   }
-// // }
+  } catch (error) {
+    console.error('❌ Error seeding database:', error);
+  } finally {
+    // Close database connection
+    await mongoose.connection.close();
+    console.log('🔌 Database connection closed');
+    process.exit(0);
+  }
+}
 
-// // // Run the seed function
-// // seedDatabase();
+// Run the seed function
+seedDatabase();
 
 
 
