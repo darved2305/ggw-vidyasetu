@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react';
 import AdminDashboard from './AdminDashboard.jsx';
 import AdminManageUsers from './AdminManageUsers.jsx';
 import AdminGenerateReports from './AdminGenerateReports.jsx';
+import FacultyApprovalPage from './FacultyApprovalPage.jsx';
 
 export default function App() {
  const [loading, setLoading] = useState(true);
@@ -55,6 +56,7 @@ export default function App() {
       <Route path='/competitions' element={<Competitions />} />
       <Route path='/admin/manage-users' element={<AdminManageUsers />} />
       <Route path='/generate-reports' element={<AdminGenerateReports />} />
+      <Route path='/faculty-approval' element={<FacultyApprovalPage />} />
     </Routes>
   );
 }
