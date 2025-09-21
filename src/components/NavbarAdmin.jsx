@@ -99,6 +99,12 @@ const NavbarAdmin = () => {
     window.location.href = '/admin/manage-users';
   };
 
+  const handleGenerateReports = () => {
+    setShowDropdown(false);
+    // Navigate to admin generate reports
+    window.location.href = '/generate-reports';
+  };
+
   const handleSettings = () => {
     setShowDropdown(false);
     // Navigate to admin settings
@@ -284,7 +290,7 @@ const NavbarAdmin = () => {
                     e.target.style.background = 'transparent';
                   }}
                 >
-                  <span style={{ fontSize: '1rem' }}>📊</span>
+                  <span style={{ fontSize: '1rem' }}>💻</span>
                   Dashboard
                 </div>
 
@@ -332,6 +338,29 @@ const NavbarAdmin = () => {
                 >
                   <span style={{ fontSize: '1rem' }}>👥</span>
                   Manage Users
+                </div>
+
+                <div
+                  onClick={handleGenerateReports}
+                  style={{
+                    padding: '10px 16px',
+                    cursor: 'pointer',
+                    fontSize: '0.9rem',
+                    color: '#333',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    transition: 'background 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = '#f8fafc';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = 'transparent';
+                  }}
+                >
+                  <span style={{ fontSize: '1rem' }}>📊</span>
+                  Generate Reports
                 </div>
 
                 <div 
