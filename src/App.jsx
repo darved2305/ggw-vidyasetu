@@ -16,6 +16,8 @@ import WorkExperiences from './components/WorkExperiences.jsx';
 import Competitions from './components/Competitions.jsx';
 import { useState, useEffect } from 'react';
 import AdminDashboard from './AdminDashboard.jsx';
+import AdminManageUsers from './AdminManageUsers.jsx';
+import AdminGenerateReports from './AdminGenerateReports.jsx';
 import FacultyApprovalPage from './FacultyApprovalPage.jsx';
 
 export default function App() {
@@ -52,6 +54,8 @@ export default function App() {
       <Route path='/admin-dashboard' element={<AdminDashboard />} />
       <Route path='/work-experiences' element={<WorkExperiences />} />
       <Route path='/competitions' element={<Competitions />} />
+      <Route path='/admin/manage-users' element={<AdminManageUsers />} />
+      <Route path='/generate-reports' element={<AdminGenerateReports />} />
       <Route path='/faculty-approval' element={<FacultyApprovalPage />} />
     </Routes>
   );
