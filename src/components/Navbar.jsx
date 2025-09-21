@@ -1,11 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo1 from '../assets/logo.svg';
 
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const [mobileNav, setMobileNav] = useState(false);
+  const [currentTime, setCurrentTime] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    function updateTime() {
+      const now = new Date();
+      // Convert to Mumbai time (IST) UTC+5:30
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const istOffset = 5.5 * 60 * 60000;
+      const istTime = new Date(utc + istOffset);
+      const timeString = istTime.toLocaleTimeString('en-IN', { hour12: false });
+      setCurrentTime(timeString);
+    }
+    updateTime();
+    const intervalId = setInterval(updateTime, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const navItems = [
     {
@@ -35,53 +51,22 @@ export default function Navbar() {
 
   return (
     <>
-      <div
-        style={{
-          background: '#3266b0',
-          color: '#fff',
-          fontSize: 15,
-          padding: '4px 0',
-          textAlign: 'center',
-          width: '100%',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 18,
-          }}
-        >
-          <a
-            href="#main-content"
-            style={{
-              color: '#fff',
-              textDecoration: 'underline',
-              fontWeight: 500,
-            }}
-          >
-            Skip to Main Content
-          </a>
-
-          <span style={{ marginLeft: 24 }}>
-            <span style={{ margin: '0 6px', cursor: 'pointer' }}>A-</span>
-            <span
-              style={{
-                margin: '0 6px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                border: '1px solid #fff',
-                borderRadius: 3,
-                padding: '0 4px',
-              }}
-            >
-              A
+      <div className="bg-blue-700 text-white text-sm py-1 text-center w-full">
+        <div className="flex items-center justify-center gap-4">
+          {/* Live Mumbai Time Display */}
+          <div className="flex items-center gap-2">
+            <span className="text-white font-medium">Mumbai Time:</span>
+            <span className="text-white font-bold bg-blue-800 px-2 py-1 rounded">
+              {currentTime}
             </span>
-            <span style={{ margin: '0 6px', cursor: 'pointer' }}>A+</span>
-            <span style={{ margin: '0 6px', cursor: 'pointer' }}>◐</span>
-            <span style={{ margin: '0 6px', cursor: 'pointer' }}>🧑‍🦽</span>
-            <span style={{ margin: '0 6px', cursor: 'pointer' }}>More</span>
+          </div>
+          <span className="ml-6">
+            <span className="mx-1 cursor-pointer">A-</span>
+            <span className="mx-1 cursor-pointer font-bold border border-white rounded px-1">A</span>
+            <span className="mx-1 cursor-pointer">A+</span>
+            <span className="mx-1 cursor-pointer">◐</span>
+            <span className="mx-1 cursor-pointer">🧑‍🦽</span>
+            <span className="mx-1 cursor-pointer">More</span>
           </span>
         </div>
       </div>
@@ -157,7 +142,7 @@ export default function Navbar() {
                     fontSize: 18,
                   }}
                 >
-                  �
+                  
                 </span>
                 <span
                   style={{
@@ -168,7 +153,7 @@ export default function Navbar() {
                     fontSize: 18,
                   }}
                 >
-                  �
+                  
                 </span>
               </div>
             </div>
